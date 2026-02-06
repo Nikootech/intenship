@@ -251,11 +251,8 @@ export default function EnrollmentPage() {
                     {/* Sidebar / Progress (Desktop: Sticky Left, Mobile: Top) */}
                     {currentStep < (enrollmentData.profile.role === 'staff' ? 3 : 4) && (
                         <div className="lg:w-1/3 lg:flex-shrink-0">
-                            <div className="lg:sticky lg:top-24">
-                                <div className="p-6 rounded-3xl bg-slate-50 dark:bg-surface/40 backdrop-blur-md border border-slate-200 dark:border-white/5">
-                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Application Progress</h3>
-                                    <p className="text-slate-600 dark:text-secondary-400 text-sm mb-6">Complete the steps below to secure your internship.</p>
-                                    
+                            <div className="lg:sticky lg:top-32">
+                                <div className="p-4 sm:p-2 border-l-2 border-slate-100 dark:border-white/5 pl-8 transition-all duration-300">
                                     <ProgressBar
                                         currentStep={currentStep}
                                         totalSteps={enrollmentData.profile.role === 'staff' ? 3 : 4}
@@ -263,10 +260,20 @@ export default function EnrollmentPage() {
                                         role={enrollmentData.profile.role}
                                     />
                                     
-                                    <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/5 hidden lg:block">
-                                        <div className="flex items-center gap-3 text-sm text-slate-500 dark:text-secondary-500">
-                                            <div className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
-                                            <span>Applications closing soon</span>
+                                    <div className="mt-12 space-y-6 hidden lg:block">
+                                        <div className="space-y-1.5 backdrop-blur-sm p-4 rounded-2xl bg-slate-50/50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-primary-500 animate-pulse" />
+                                                <span className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-widest">Guide</span>
+                                            </div>
+                                            <p className="text-xs text-slate-500 dark:text-secondary-500 font-medium leading-relaxed">
+                                                Complete your profile and select a specialization to unlock the learning dashboard.
+                                            </p>
+                                        </div>
+
+                                        <div className="flex items-center gap-3 px-4 py-3 bg-white/50 dark:bg-transparent border border-dashed border-slate-200 dark:border-white/10 rounded-2xl">
+                                            <div className="flex h-1.5 w-1.5 rounded-full bg-green-500" />
+                                            <span className="text-[9px] font-bold text-slate-400 dark:text-secondary-600 uppercase tracking-[0.2em]">Systems Operational</span>
                                         </div>
                                     </div>
                                 </div>

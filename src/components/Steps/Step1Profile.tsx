@@ -160,9 +160,9 @@ const Step1Profile: React.FC<Step1ProfileProps> = ({ onNext, initialData }) => {
                     <Button
                         type="submit"
                         variant="primary"
-                        size="lg"
+                        size="md"
                         isLoading={isSubmitting}
-                        className="w-full"
+                        className="w-full sm:w-auto px-12"
                     >
                         Continue to Domain Selection
                     </Button>

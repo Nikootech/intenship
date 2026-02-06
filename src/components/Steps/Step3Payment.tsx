@@ -162,8 +162,8 @@ const Step3Payment: React.FC<Step3PaymentProps> = ({
 
                             <Button 
                                 variant="glow" 
-                                size="lg" 
-                                className="w-full text-lg h-16 shadow-xl"
+                                size="md" 
+                                className="w-full shadow-xl"
                                 onClick={handlePayment}
                                 isLoading={isLoading}
                                 disabled={!razorpayLoaded}
@@ -193,7 +193,7 @@ const Step3Payment: React.FC<Step3PaymentProps> = ({
 
                     <Button 
                         variant="ghost" 
-                        size="sm" 
+                        size="md" 
                         onClick={onBack}
                         disabled={isLoading}
                         className="w-full text-slate-500 dark:text-secondary-500 hover:text-slate-900 dark:hover:text-white"

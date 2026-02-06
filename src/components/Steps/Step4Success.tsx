@@ -211,7 +211,7 @@ const Step4Success: React.FC<Step4SuccessProps> = ({
                     variant="primary"
                     size="md"
                     onClick={handleWhatsAppShare}
-                    className="w-full shadow-xl shadow-primary-500/10 !rounded-2xl py-4 h-auto group"
+                    className="w-full shadow-xl shadow-primary-500/10 group"
                 >
                     <Share2 size={18} className="group-hover:rotate-12 transition-transform" />
                     <span className="font-black uppercase tracking-wider text-xs">{isStaff ? 'Contact Admin' : 'Share Success'}</span>
@@ -222,7 +222,7 @@ const Step4Success: React.FC<Step4SuccessProps> = ({
                         variant="secondary"
                         size="md"
                         onClick={() => toast.success('Sending receipt to your email...')}
-                        className="w-full !rounded-2xl py-4 h-auto group text-secondary-800 border-secondary-100"
+                        className="w-full group text-secondary-800 border-secondary-100"
                     >
                         <Download size={18} className="group-hover:-translate-y-1 transition-transform" />
                         <span className="font-black uppercase tracking-wider text-xs">Receipt</span>
@@ -235,7 +235,7 @@ const Step4Success: React.FC<Step4SuccessProps> = ({
                     onClick={() => {
                         window.print();
                     }}
-                    className="w-full !rounded-2xl py-4 h-auto group text-secondary-800 border-secondary-100"
+                    className="w-full group text-secondary-800 border-secondary-100"
                 >
                     <Download size={18} className="group-hover:scale-110 transition-transform" />
                     <span className="font-black uppercase tracking-wider text-xs">Print PDF</span>

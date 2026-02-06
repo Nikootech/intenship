@@ -5,6 +5,13 @@
 @layer base {
   :root {
     --color-primary: 220 38 38; /* #DC2626 */
+    --autofill-bg: #f8fafc; /* slate-50 */
+    --autofill-text: #0f172a; /* slate-900 */
+  }
+
+  .dark {
+    --autofill-bg: #0C0707;
+    --autofill-text: #ffffff;
   }
 
   body {
@@ -31,18 +38,30 @@
     text-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
   }
   
-  /* Modern Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   
   ::-webkit-scrollbar-track {
-    @apply bg-background;
+    background: transparent;
   }
   
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary-900/50 rounded-full hover:bg-primary-500/50 transition-colors;
+    @apply bg-slate-300 dark:bg-white/10 rounded-full hover:bg-primary-500/50 transition-colors;
+  }
+
+  /* Custom Scrollbar for Dropdowns */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-200 dark:bg-white/5 rounded-full hover:bg-primary-500/30;
   }
 
   /* Auto-fill fix */
@@ -50,8 +69,8 @@
   input:-webkit-autofill:hover, 
   input:-webkit-autofill:focus, 
   input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #0C0707 inset !important;
-    -webkit-text-fill-color: white !important;
+    -webkit-box-shadow: 0 0 0 30px var(--autofill-bg) inset !important;
+    -webkit-text-fill-color: var(--autofill-text) !important;
     transition: background-color 5000s ease-in-out 0s;
   }
 }

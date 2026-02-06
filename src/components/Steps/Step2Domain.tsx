@@ -102,13 +102,11 @@ const Step2Domain: React.FC<Step2DomainProps> = ({
                         >
                             <Card
                                 onClick={() => toggleDomain(domain)}
-                                className={`
-                                    h-full cursor-pointer relative overflow-hidden transition-all duration-300
-                                    ${isSelected 
-                                        ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/10 shadow-[0_0_30px_-5px_rgba(235,49,54,0.3)]' 
-                                        : 'hover:border-primary-500/30 hover:bg-slate-50 dark:hover:bg-surface/60'
-                                    }
-                                `}
+                                className={`h-full cursor-pointer transition-all duration-500 relative overflow-hidden group/card ${
+                                    isSelected 
+                                    ? 'border-2 border-primary-600 shadow-[0_20px_40px_-15px_rgba(220,38,38,0.1)] ring-4 ring-primary-500/5' 
+                                    : 'border border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10 hover:shadow-xl shadow-sm bg-white/50 dark:bg-transparent'
+                                }`}
                             >
                                 {/* Selection Checkmark */}
                                 <AnimatePresence>
@@ -124,24 +122,40 @@ const Step2Domain: React.FC<Step2DomainProps> = ({
                                     )}
                                 </AnimatePresence>
 
-                                <div className="flex items-start gap-4 mb-6">
-                                    <div className={`p-4 rounded-xl transition-colors shrink-0 ${isSelected ? 'bg-primary-500 text-white shadow-glow' : 'bg-slate-200 dark:bg-white/5 text-slate-500 dark:text-text-secondary'}`}>
+                                <div className="flex items-start gap-6 mb-8">
+                                    <div className={`p-4 rounded-2xl transition-all duration-500 shrink-0 ${isSelected ? 'bg-primary-600 text-white' : 'bg-slate-50 dark:bg-white/5 text-slate-400 group-hover/card:text-primary-500 group-hover/card:bg-primary-50'}`}>
                                         <Icon className="w-8 h-8" />
                                     </div>
-                                    <div>
-                                        <h3 className={`text-xl font-bold mb-1 ${isSelected ? 'text-slate-900 dark:text-white' : 'text-slate-900 dark:text-text-primary'}`}>
+                                    <div className="flex-1 min-w-0">
+                                        <div className="mb-2.5">
+                                            <span className={`text-[9px] font-black uppercase tracking-[0.2em] px-2 py-1 rounded-md ${isSelected ? 'bg-primary-500 text-white' : 'bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-secondary-500 border border-slate-200 dark:border-white/10'}`}>
+                                                {domain.duration}
+                                            </span>
+                                        </div>
+                                        <h3 className={`text-xl font-black tracking-tight mb-2 ${isSelected ? 'text-slate-900 dark:text-white' : 'text-slate-900 dark:text-text-primary'}`}>
                                             {domain.title}
                                         </h3>
-                                        <p className="text-slate-600 dark:text-secondary-500 text-sm font-medium">{domain.subtitle}</p>
+                                        <p className="text-xs sm:text-sm text-slate-500 dark:text-secondary-500 font-medium leading-relaxed">
+                                            {domain.description}
+                                        </p>
                                     </div>
                                 </div>
 
-                                <div className="space-y-4 mb-6">
-                                    <div className="flex flex-wrap gap-2">
+                                <div className="space-y-6">
+                                    <div className="grid grid-cols-1 gap-3">
+                                        {domain.features.map((feature, idx) => (
+                                            <div key={idx} className="flex items-center gap-2.5 text-xs font-semibold text-slate-600 dark:text-secondary-400">
+                                                <div className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-primary-500 shadow-[0_0_8px_rgba(220,38,38,0.4)]' : 'bg-slate-300 dark:bg-white/10'}`} />
+                                                {feature}
+                                            </div>
+                                        ))}
+                                    </div>
+                                    
+                                    <div className="pt-6 border-t border-slate-100 dark:border-white/5 flex flex-wrap gap-2">
                                         {domain.subcourses?.map((sc, idx) => (
                                             <span 
                                                 key={idx} 
-                                                className={`text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-md border ${isSelected ? 'bg-primary-500/20 border-primary-500/30 text-primary-700 dark:text-white' : 'bg-slate-200 dark:bg-white/5 border-slate-300 dark:border-white/5 text-slate-500 dark:text-secondary-400'}`}
+                                                className={`text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg border ${isSelected ? 'bg-primary-500/10 border-primary-500/20 text-primary-700 dark:text-white' : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/5 text-slate-400 dark:text-secondary-500'}`}
                                             >
                                                 {sc}
                                             </span>

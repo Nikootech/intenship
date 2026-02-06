@@ -6,9 +6,11 @@ export interface InternshipDomain {
     id: string;
     title: InternshipDomainTitle;
     subtitle: string;
+    description: string;
     icon: string;
     features: string[];
     price: number;
+    duration: string;
     subcourses?: string[];
     recommended?: boolean;
 }
@@ -89,41 +91,47 @@ export const INTERNSHIP_DOMAINS: InternshipDomain[] = [
         id: 'frontend',
         title: 'Frontend Development',
         subtitle: 'Professional Web UI Training',
+        description: 'Master the art of building modern, responsive user interfaces using the latest web technologies.',
         icon: 'Code',
         price: 2500,
+        duration: '15 Days Live Training',
         recommended: true,
         features: [
-            'Live Project Work',
-            'Practical Skills',
-            'Internship Certificate',
-            'Job Ready Training',
+            '100% Practical & Project Based',
+            'Modern UI/UX Principles',
+            'React & Tailwind Integration',
+            'Lifetime Content Access',
+            'Industry Level Code Review',
         ],
         subcourses: [
-            'HTML',
-            'CSS',
-            'JavaScript',
-            'Responsive Design',
-            'UI Basics',
+            'HTML5 & Semantic Web',
+            'Modern CSS & Tailwind',
+            'Interactive JavaScript',
+            'Responsive Layouts',
+            'UI Components',
         ],
     },
     {
         id: 'backend',
         title: 'Backend & Database',
         subtitle: 'Server-Side & Data Systems',
+        description: 'Build robust, scalable server-side applications and master complex database management systems.',
         icon: 'Database',
         price: 3500,
+        duration: '15 Days Live Training',
         features: [
-            'Live Project Work',
-            'Practical Skills',
-            'Internship Certificate',
-            'Job Ready Training',
+            'Live Server Deployment',
+            'Database Architecture',
+            'API Security Basics',
+            'Performance Optimization',
+            'Node.js & SQL Mastery',
         ],
         subcourses: [
-            'Backend Fundamentals',
-            'API Basics',
-            'Database Concepts',
-            'SQL',
-            'Server-Side Logic',
+            'Node.js Fundamentals',
+            'Express Framework',
+            'PostgreSQL & SQL',
+            'Restful API Design',
+            'Data Security',
         ],
     },
 ];
