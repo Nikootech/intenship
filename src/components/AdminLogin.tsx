@@ -91,7 +91,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
                                 transition={{ type: "spring", damping: 15 }}
                                 className="w-20 h-20 bg-surface rounded-2xl flex items-center justify-center border border-secondary-800 shadow-lg shadow-black/50 mb-4 p-2"
                             >
-                                <img src="/logo.png" alt="Mind Mesh Logo" className="w-full h-full object-contain" />
+                                <img src="/logo.png" alt="Mind Mesh Logo" className="w-full h-full object-contain brightness-0 invert" />
                             </motion.div>
                             <h2 className="text-2xl font-black text-white tracking-tight">Admin Portal</h2>
                             <p className="text-secondary-400 text-xs font-semibold mt-1">Authorized Access Protocol</p>

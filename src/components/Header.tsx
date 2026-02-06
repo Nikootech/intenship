@@ -17,7 +17,7 @@ const Header: React.FC = () => {
                             <img
                                 src="/logo.png"
                                 alt="Mind Mesh Logo"
-                                className="w-full h-full object-contain"
+                                className="w-full h-full object-contain brightness-0 invert"
                                 onError={(e) => {
                                     e.currentTarget.style.display = 'none';
                                     e.currentTarget.parentElement?.classList.add('fallback-logo');
