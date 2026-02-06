@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Palette, Code, Database, Zap, Info } from 'lucide-react';
+import { Palette, Code, Database, Zap, Info, CheckCircle2 } from 'lucide-react';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
 import { InternshipDomain, INTERNSHIP_DOMAINS } from '@/types/enrollment';
@@ -9,7 +9,7 @@ interface Step2DomainProps {
     onNext: (domains: InternshipDomain[]) => Promise<void> | void;
     onBack: () => void;
     initialData?: InternshipDomain | null;
-    role?: 'student' | 'staff'; // Added role
+    role?: 'student' | 'staff';
 }
 
 const iconMap = {
@@ -42,7 +42,6 @@ const Step2Domain: React.FC<Step2DomainProps> = ({
 
     const handleContinue = async () => {
         if (selectedDomains.length === 0) {
-            // Interactive feedback instead of disabled button
             import('react-hot-toast').then(({ default: toast }) => {
                 toast.error('Please select at least one course to proceed');
             });
@@ -55,8 +54,6 @@ const Step2Domain: React.FC<Step2DomainProps> = ({
         } catch (error) {
             console.error("Submission failed", error);
         } finally {
-            // Only stop loading if we are NOT unmounting (tough to know, but standard pattern)
-            // If onNext navigates away, this state update might warn, but that's acceptable/benign here.
             setIsSubmitting(false);
         }
     };
@@ -68,27 +65,29 @@ const Step2Domain: React.FC<Step2DomainProps> = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto"
         >
-            <div className="text-center mb-8">
+            <div className="text-center mb-10">
                 <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 200 }}
-                    className="inline-block p-3 bg-surface rounded-xl mb-3 border border-primary-500/30"
+                    className="inline-flex p-3 bg-primary-100 dark:bg-primary-500/20 rounded-2xl mb-4 border border-primary-200 dark:border-primary-500/20 shadow-glow"
                 >
-                    <Zap className="w-6 h-6 text-primary-500" />
+                    <Zap className="w-8 h-8 text-primary-600 dark:text-primary-500" />
                 </motion.div>
-                <h2 className="text-3xl font-black text-secondary-900 mb-1">
-                    {isStaff ? 'Course Specialization' : 'Professional Course Selection'}
+                <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">
+                    {isStaff ? 'Course Assignment' : 'Choose Your Specialization'}
                 </h2>
-                <p className="text-text-muted font-medium text-sm">
-                    {isStaff ? 'Select the domain you will be assisting with.' : 'Customize your training program. You can select one or both courses.'}
+                <p className="text-slate-600 dark:text-secondary-400 text-lg font-medium">
+                    Select the domains you want to master. 
+                    <span className="text-primary-600 dark:text-primary-400 font-bold ml-1">
+                        {isStaff ? 'Staff access granted.' : 'Add multiple for a comprehensive portfolio.'}
+                    </span>
                 </p>
             </div>
 
-            {/* Domain Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
                 {INTERNSHIP_DOMAINS.map((domain, index) => {
                     const Icon = iconMap[domain.icon as keyof typeof iconMap];
                     const isSelected = selectedDomains.some(d => d.id === domain.id);
@@ -99,49 +98,63 @@ const Step2Domain: React.FC<Step2DomainProps> = ({
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.1 }}
-                            className="relative"
+                            className="relative group h-full"
                         >
-                            {domain.recommended && !isStaff && (
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-                                    <span className="bg-gradient-to-r from-primary-500 to-sky-600 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
-                                        Best Value / Recommended
-                                    </span>
-                                </div>
-                            )}
-
                             <Card
-                                selected={isSelected}
                                 onClick={() => toggleDomain(domain)}
-                                className={`p-6 h-full transition-all duration-500 cursor-pointer border-2 relative overflow-hidden ${isSelected
-                                    ? 'border-primary-500 shadow-glow bg-primary-900/10'
-                                    : 'border-border hover:border-primary-200 bg-surface'
-                                    }`}
+                                className={`
+                                    h-full cursor-pointer relative overflow-hidden transition-all duration-300
+                                    ${isSelected 
+                                        ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/10 shadow-[0_0_30px_-5px_rgba(235,49,54,0.3)]' 
+                                        : 'hover:border-primary-500/30 hover:bg-slate-50 dark:hover:bg-surface/60'
+                                    }
+                                `}
                             >
-                                <div className="flex flex-col items-center text-center gap-4 mb-6">
-                                    <div className={`p-4 rounded-2xl transition-colors ${isSelected ? 'bg-primary-500 text-white' : 'bg-background text-secondary-400'
-                                        }`}>
-                                        <Icon className="w-10 h-10" />
+                                {/* Selection Checkmark */}
+                                <AnimatePresence>
+                                    {isSelected && (
+                                        <motion.div
+                                            initial={{ scale: 0 }}
+                                            animate={{ scale: 1 }}
+                                            exit={{ scale: 0 }}
+                                            className="absolute top-4 right-4 text-primary-500"
+                                        >
+                                            <CheckCircle2 className="w-6 h-6 fill-primary-500/20" />
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+
+                                <div className="flex items-start gap-4 mb-6">
+                                    <div className={`p-4 rounded-xl transition-colors shrink-0 ${isSelected ? 'bg-primary-500 text-white shadow-glow' : 'bg-slate-200 dark:bg-white/5 text-slate-500 dark:text-text-secondary'}`}>
+                                        <Icon className="w-8 h-8" />
                                     </div>
                                     <div>
-                                        <h3 className={`text-2xl font-bold mb-1 ${isSelected ? 'text-white' : 'text-white'}`}>
+                                        <h3 className={`text-xl font-bold mb-1 ${isSelected ? 'text-slate-900 dark:text-white' : 'text-slate-900 dark:text-text-primary'}`}>
                                             {domain.title}
                                         </h3>
-                                        <p className="text-secondary-500 font-bold text-sm">{domain.subtitle}</p>
-                                    </div>
-                                    <div className={`text-3xl font-black ${isSelected ? 'text-white' : 'text-white'}`}>
-                                        {isStaff ? 'Staff Track' : `₹${domain.price}`}
+                                        <p className="text-slate-600 dark:text-secondary-500 text-sm font-medium">{domain.subtitle}</p>
                                     </div>
                                 </div>
 
-                                <div className="space-y-4 border-t border-border pt-6">
-                                    <p className="text-xs font-black uppercase tracking-widest text-secondary-400 mb-2">Curriculum Includes:</p>
-                                    <div className="grid grid-cols-2 gap-2">
+                                <div className="space-y-4 mb-6">
+                                    <div className="flex flex-wrap gap-2">
                                         {domain.subcourses?.map((sc, idx) => (
-                                            <div key={idx} className="flex items-center gap-1.5">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-primary-400" />
-                                                <span className="text-[11px] font-bold text-text-muted">{sc}</span>
-                                            </div>
+                                            <span 
+                                                key={idx} 
+                                                className={`text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-md border ${isSelected ? 'bg-primary-500/20 border-primary-500/30 text-primary-700 dark:text-white' : 'bg-slate-200 dark:bg-white/5 border-slate-300 dark:border-white/5 text-slate-500 dark:text-secondary-400'}`}
+                                            >
+                                                {sc}
+                                            </span>
                                         ))}
+                                    </div>
+                                </div>
+
+                                <div className="pt-6 border-t border-slate-200 dark:border-white/5 flex items-end justify-between">
+                                    <div className="text-xs font-medium text-slate-500 dark:text-secondary-500">
+                                        Total Fee
+                                    </div>
+                                    <div className={`text-3xl font-black tracking-tight ${isSelected ? 'text-primary-600 dark:text-primary-400' : 'text-slate-900 dark:text-white'}`}>
+                                        {isStaff ? 'FREE' : `₹${domain.price}`}
                                     </div>
                                 </div>
                             </Card>
@@ -150,63 +163,48 @@ const Step2Domain: React.FC<Step2DomainProps> = ({
                 })}
             </div>
 
-            {/* Selection Summary */}
-            <AnimatePresence>
-                {selectedDomains.length > 0 && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        className="bg-surface rounded-2xl p-6 mb-8 text-white shadow-xl relative overflow-hidden border border-border"
-                    >
-                        <div className="absolute -top-4 -right-4 p-4 opacity-[0.03]">
-                            <Info className="w-20 h-20" />
-                        </div>
-                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
-                            <div>
-                                <p className="text-primary-400 font-black uppercase tracking-widest text-[10px] mb-2">Selected Programs</p>
-                                <div className="flex flex-wrap gap-2">
-                                    {selectedDomains.map(d => (
-                                        <span key={d.id} className="bg-white/5 px-4 py-1 rounded-lg text-xs font-black border border-white/10 uppercase tracking-tight">
-                                            {d.title}
-                                        </span>
-                                    ))}
-                                </div>
+            {/* Bottom Bar */}
+             <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/90 dark:bg-background/80 backdrop-blur-xl border-t border-slate-200 dark:border-white/10 z-40 sm:static sm:bg-transparent sm:border-0 sm:p-0">
+                <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center gap-4">
+                    {selectedDomains.length > 0 ? (
+                        <div className="flex-1 w-full sm:w-auto flex items-center justify-between sm:justify-start gap-4 bg-slate-50 dark:bg-surface/80 border border-slate-200 dark:border-primary-500/20 px-6 py-3 rounded-xl">
+                            <div className="flex items-center gap-3">
+                                <Info className="w-5 h-5 text-primary-600 dark:text-primary-500" />
+                                <span className="text-sm font-medium text-slate-600 dark:text-secondary-400">
+                                    {selectedDomains.length} {selectedDomains.length === 1 ? 'Course' : 'Courses'} Selected
+                                </span>
                             </div>
-                            <div className="text-right">
-                                <p className="text-secondary-400 font-black text-[10px] mb-1 uppercase tracking-widest text-left md:text-right">
-                                    {isStaff ? 'Enrollment Status' : 'Total Payable'}
-                                </p>
-                                <p className="text-4xl font-black text-white">
-                                    {isStaff ? 'FREE' : `₹${totalPrice}`}
-                                </p>
+                            <div className="text-xl font-black text-slate-900 dark:text-white">
+                                {isStaff ? '₹0' : `₹${totalPrice}`}
                             </div>
                         </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    ) : (
+                        <div className="flex-1" />
+                    )}
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                    variant="secondary"
-                    size="md"
-                    onClick={onBack}
-                    className="flex-1"
-                >
-                    Previous Step
-                </Button>
-                <Button
-                    variant="primary"
-                    size="md"
-                    onClick={handleContinue}
-                    disabled={isSubmitting}
-                    isLoading={isSubmitting}
-                    className="flex-1"
-                >
-                    {isStaff ? (isSubmitting ? 'Submitting...' : 'Submit Application') : 'Proceed to Payment'} →
-                </Button>
+                    <div className="flex gap-3 w-full sm:w-auto">
+                        <Button
+                            variant="secondary"
+                            onClick={onBack}
+                            className="flex-1 sm:flex-none"
+                        >
+                            Back
+                        </Button>
+                        <Button
+                            variant="primary"
+                            onClick={handleContinue}
+                            disabled={isSubmitting}
+                            isLoading={isSubmitting}
+                            className="flex-1 sm:flex-none"
+                        >
+                            {isStaff ? 'Confirm Assignment' : 'Proceed to Payment'}
+                        </Button>
+                    </div>
+                </div>
             </div>
+            
+            {/* Spacer for fixed bottom bar on mobile */}
+            <div className="h-24 sm:h-0" />
         </motion.div>
     );
 };

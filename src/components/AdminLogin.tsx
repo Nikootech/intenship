@@ -49,7 +49,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <pattern id="mesh-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" className="text-secondary-800/30" strokeWidth="1" />
+                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" className="text-slate-300 dark:text-secondary-800/30" strokeWidth="1" />
                         </pattern>
                     </defs>
                     <rect width="100%" height="100%" fill="url(#mesh-grid)" />
@@ -80,20 +80,20 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
                 className="w-full max-w-[380px] relative z-10"
             >
                 <div className="relative">
-                    <div className="absolute inset-0 bg-surface/50 backdrop-blur-3xl rounded-3xl shadow-2xl border border-secondary-800 -rotate-1 scale-[1.02] z-0" />
+                    <div className="absolute inset-0 bg-white/50 dark:bg-surface/50 backdrop-blur-3xl rounded-3xl shadow-2xl border border-slate-200 dark:border-secondary-800 -rotate-1 scale-[1.02] z-0" />
 
-                    <div className="relative bg-surface/80 backdrop-blur-2xl border border-secondary-800 p-8 rounded-3xl shadow-xl z-10">
+                    <div className="relative bg-white/80 dark:bg-surface/80 backdrop-blur-2xl border border-slate-200 dark:border-secondary-800 p-8 rounded-3xl shadow-xl z-10">
                         {/* Branding */}
                         <div className="flex flex-col items-center mb-6">
                             <motion.div
                                 initial={{ scale: 0.8, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
                                 transition={{ type: "spring", damping: 15 }}
-                                className="w-20 h-20 bg-surface rounded-2xl flex items-center justify-center border border-secondary-800 shadow-lg shadow-black/50 mb-4 p-2"
+                                className="w-20 h-20 bg-slate-50 dark:bg-surface rounded-2xl flex items-center justify-center border border-slate-200 dark:border-secondary-800 shadow-lg dark:shadow-black/50 mb-4 p-2"
                             >
-                                <img src="/logo.png" alt="Mind Mesh Logo" className="w-full h-full object-contain brightness-0 invert" />
+                                <img src="/logo.png" alt="Mind Mesh Logo" className="w-full h-full object-contain dark:logo-invert" />
                             </motion.div>
-                            <h2 className="text-2xl font-black text-white tracking-tight">Admin Portal</h2>
+                            <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Admin Portal</h2>
                             <p className="text-secondary-400 text-xs font-semibold mt-1">Authorized Access Protocol</p>
                         </div>
 
@@ -111,7 +111,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             placeholder="admin@mindmesh.com"
-                                            className="w-full pl-10 pr-4 py-3 bg-background hover:bg-surface focus:bg-surface border text-sm border-secondary-800 focus:border-primary-500 rounded-xl text-white font-bold transition-all outline-none placeholder:text-secondary-600"
+                                            className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-background hover:bg-white dark:hover:bg-surface focus:bg-white dark:focus:bg-surface border text-sm border-slate-200 dark:border-secondary-800 focus:border-primary-500 rounded-xl text-slate-900 dark:text-white font-bold transition-all outline-none placeholder:text-slate-400 dark:placeholder:text-secondary-600"
                                             disabled={isSubmitting}
                                             required
                                         />
@@ -130,7 +130,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                             placeholder="••••••••••••"
-                                            className="w-full pl-10 pr-4 py-3 bg-background hover:bg-surface focus:bg-surface border text-sm border-secondary-800 focus:border-primary-500 rounded-xl text-white font-bold transition-all outline-none placeholder:text-secondary-600"
+                                            className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-background hover:bg-white dark:hover:bg-surface focus:bg-white dark:focus:bg-surface border text-sm border-slate-200 dark:border-secondary-800 focus:border-primary-500 rounded-xl text-slate-900 dark:text-white font-bold transition-all outline-none placeholder:text-slate-400 dark:placeholder:text-secondary-600"
                                             disabled={isSubmitting}
                                             required
                                         />

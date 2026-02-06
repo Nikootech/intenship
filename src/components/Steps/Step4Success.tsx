@@ -115,10 +115,10 @@ const Step4Success: React.FC<Step4SuccessProps> = ({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
                 >
-                    <h2 className="text-4xl font-black text-white mt-6 mb-2 tracking-tight">
+                    <h2 className="text-4xl font-black text-slate-900 dark:text-white mt-6 mb-2 tracking-tight">
                         {isStaff ? 'Application Received' : 'You\'re All Set! 🎉'}
                     </h2>
-                    <p className="text-secondary-500 text-lg font-medium max-w-lg mx-auto leading-relaxed">
+                    <p className="text-slate-600 dark:text-secondary-500 text-lg font-medium max-w-lg mx-auto leading-relaxed">
                         {isStaff ? `Thank you, ${studentName}. We've received your application and will review it shortly.` : `Welcome to the Mind Mesh family, ${studentName}! Your journey starts here.`}
                     </p>
                 </motion.div>
@@ -158,7 +158,7 @@ const Step4Success: React.FC<Step4SuccessProps> = ({
                                         whileHover={{ scale: 1.1 }}
                                         whileTap={{ scale: 0.9 }}
                                         onClick={handleCopyEnrollmentId}
-                                        className="p-2 bg-secondary-50 rounded-xl hover:text-primary-500 transition-colors"
+                                        className="p-2 bg-slate-100 dark:bg-secondary-50 rounded-xl hover:text-primary-500 transition-colors"
                                     >
                                         <Copy className="w-4 h-4" />
                                     </motion.button>
@@ -166,17 +166,17 @@ const Step4Success: React.FC<Step4SuccessProps> = ({
                             </div>
 
                             <div className="space-y-4">
-                                <div className="p-4 bg-secondary-50/50 rounded-2xl border border-secondary-100/50">
-                                    <p className="text-secondary-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Selected Domain</p>
-                                    <p className="text-lg font-black text-secondary-800">{domain}</p>
+                                <div className="p-4 bg-slate-50 dark:bg-secondary-50/50 rounded-2xl border border-slate-200 dark:border-secondary-100/50">
+                                    <p className="text-slate-500 dark:text-secondary-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Selected Domain</p>
+                                    <p className="text-lg font-black text-slate-800 dark:text-secondary-800">{domain}</p>
                                 </div>
 
                                 {!isStaff && (
-                                    <div className="flex items-center gap-3 px-4 py-3 bg-primary-500/5 rounded-2xl border border-primary-500/10">
-                                        <Award className="w-5 h-5 text-primary-500" />
+                                    <div className="flex items-center gap-3 px-4 py-3 bg-primary-100 dark:bg-primary-500/5 rounded-2xl border border-primary-200 dark:border-primary-500/10">
+                                        <Award className="w-5 h-5 text-primary-600 dark:text-primary-500" />
                                         <div className="flex flex-col">
-                                            <span className="font-black text-primary-600 text-xs uppercase tracking-tight">Verified Enrollment</span>
-                                            <span className="text-[10px] text-secondary-500 font-medium">Certificate allocation initiated</span>
+                                            <span className="font-black text-primary-700 dark:text-primary-600 text-xs uppercase tracking-tight">Verified Enrollment</span>
+                                            <span className="text-[10px] text-slate-500 dark:text-secondary-500 font-medium">Certificate allocation initiated</span>
                                         </div>
                                     </div>
                                 )}
@@ -246,22 +246,22 @@ const Step4Success: React.FC<Step4SuccessProps> = ({
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.1 }}
-                className="bg-surface border border-border rounded-[2.5rem] p-8 sm:p-10 shadow-2xl shadow-black/50 relative overflow-hidden group"
+                className="bg-white dark:bg-surface border border-slate-200 dark:border-border rounded-[2.5rem] p-8 sm:p-10 shadow-xl dark:shadow-2xl dark:shadow-black/50 relative overflow-hidden group"
             >
                 <div className="absolute top-0 right-0 p-12 opacity-[0.03] pointer-events-none group-hover:scale-110 transition-transform duration-700">
-                    <Clock className="w-40 h-40 text-secondary-900" />
+                    <Clock className="w-40 h-40 text-slate-900 dark:text-secondary-900" />
                 </div>
 
-                <h3 className="text-2xl font-black text-white mb-8 flex items-center gap-3">
-                    <span className="p-2 bg-surface rounded-xl border border-primary-500/30">
-                        <Monitor className="w-5 h-5 text-primary-500" />
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3">
+                    <span className="p-2 bg-slate-50 dark:bg-surface rounded-xl border border-slate-200 dark:border-primary-500/30">
+                        <Monitor className="w-5 h-5 text-primary-600 dark:text-primary-500" />
                     </span>
                     Program Onboarding
                 </h3>
 
                 <div className="grid gap-6">
                     {!isStaff && meetingData && (
-                        <div className="bg-gradient-to-br from-surface to-black border border-primary-500/20 rounded-3xl p-6 relative overflow-hidden group/card hover:border-primary-500/40 transition-all duration-300">
+                        <div className="bg-gradient-to-br from-slate-50 to-white dark:from-surface dark:to-black border border-slate-200 dark:border-primary-500/20 rounded-3xl p-6 relative overflow-hidden group/card hover:border-primary-500/40 transition-all duration-300">
                             {/* Glow Effect */}
                             <div className="absolute inset-0 bg-primary-500/5 blur-3xl group-hover/card:bg-primary-500/10 transition-colors" />
 
@@ -270,26 +270,26 @@ const Step4Success: React.FC<Step4SuccessProps> = ({
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-3 w-3 bg-primary-500"></span>
                                 </div>
-                                <p className="font-black text-xs uppercase tracking-[0.3em] text-primary-600">Live Induction Link</p>
+                                <p className="font-black text-xs uppercase tracking-[0.3em] text-primary-700 dark:text-primary-600">Live Induction Link</p>
                             </div>
 
                             <div className="grid sm:grid-cols-2 gap-8 mb-8">
                                 <div className="flex items-center gap-4 relative z-10">
-                                    <div className="p-2.5 bg-surface/50 rounded-2xl shadow-sm border border-border">
-                                        <Calendar className="w-6 h-6 text-primary-500" />
+                                    <div className="p-2.5 bg-slate-100 dark:bg-surface/50 rounded-2xl shadow-sm border border-slate-200 dark:border-border">
+                                        <Calendar className="w-6 h-6 text-primary-600 dark:text-primary-500" />
                                     </div>
                                     <div>
-                                        <p className="text-[10px] text-secondary-400 uppercase font-bold tracking-widest mb-0.5">Start Date</p>
-                                        <p className="text-lg font-black text-white">{meetingData.date}</p>
+                                        <p className="text-[10px] text-slate-500 dark:text-secondary-400 uppercase font-bold tracking-widest mb-0.5">Start Date</p>
+                                        <p className="text-lg font-black text-slate-900 dark:text-white">{meetingData.date}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4 relative z-10">
-                                    <div className="p-2.5 bg-surface/50 rounded-2xl shadow-sm border border-border">
-                                        <Clock className="w-6 h-6 text-primary-500" />
+                                    <div className="p-2.5 bg-slate-100 dark:bg-surface/50 rounded-2xl shadow-sm border border-slate-200 dark:border-border">
+                                        <Clock className="w-6 h-6 text-primary-600 dark:text-primary-500" />
                                     </div>
                                     <div>
-                                        <p className="text-[10px] text-secondary-400 uppercase font-bold tracking-widest mb-0.5">Session Time</p>
-                                        <p className="text-lg font-black text-white">{meetingData.time}</p>
+                                        <p className="text-[10px] text-slate-500 dark:text-secondary-400 uppercase font-bold tracking-widest mb-0.5">Session Time</p>
+                                        <p className="text-lg font-black text-slate-900 dark:text-white">{meetingData.time}</p>
                                     </div>
                                 </div>
                             </div>
@@ -319,10 +319,10 @@ const Step4Success: React.FC<Step4SuccessProps> = ({
                             "Prepare your development environment by this Sunday"
                         ]).map((step, i) => (
                             <div key={i} className="flex items-center gap-4 group/step">
-                                <div className="flex-shrink-0 w-8 h-8 rounded-full border-2 border-primary-100 flex items-center justify-center text-xs font-black text-primary-500 group-hover/step:border-primary-500 group-hover/step:bg-primary-500 group-hover/step:text-white transition-all duration-300">
+                                <div className="flex-shrink-0 w-8 h-8 rounded-full border-2 border-primary-200 dark:border-primary-100 flex items-center justify-center text-xs font-black text-primary-600 dark:text-primary-500 group-hover/step:border-primary-500 group-hover/step:bg-primary-500 group-hover/step:text-white transition-all duration-300">
                                     {i + 1}
                                 </div>
-                                <p className="text-secondary-600 text-sm font-medium">{step}</p>
+                                <p className="text-slate-600 dark:text-secondary-600 text-sm font-medium">{step}</p>
                             </div>
                         ))}
                     </div>

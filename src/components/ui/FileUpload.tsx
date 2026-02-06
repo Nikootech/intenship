@@ -122,11 +122,11 @@ const FileUpload: React.FC<FileUploadProps> = ({
                         onDrop={handleDrop}
                         className={`
               relative overflow-hidden group
-              w-full p-8 transition-all duration-300 cursor-pointer bg-surface
+              w-full p-8 transition-all duration-300 cursor-pointer bg-slate-50 dark:bg-surface
               border-2 border-dashed rounded-2xl
               ${isDragging
-                                ? 'border-primary-500 bg-primary-50/10'
-                                : 'border-border hover:border-primary-300 hover:bg-secondary-50'
+                                ? 'border-primary-500 bg-primary-50 dark:bg-primary-50/10'
+                                : 'border-slate-200 dark:border-border hover:border-primary-300 hover:bg-slate-100 dark:hover:bg-secondary-50'
                             }
             `}
                     >
@@ -155,8 +155,8 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
                             {isUploading ? (
                                 <div className="w-full max-w-xs">
-                                    <p className="text-secondary-900 font-semibold mb-3">Uploading...</p>
-                                    <div className="w-full h-2 bg-secondary-200 rounded-full overflow-hidden">
+                                    <p className="text-slate-900 dark:text-white font-semibold mb-3">Uploading...</p>
+                                    <div className="w-full h-2 bg-slate-200 dark:bg-secondary-200 rounded-full overflow-hidden">
                                         <motion.div
                                             initial={{ width: 0 }}
                                             animate={{ width: `${uploadProgress}%` }}
@@ -167,13 +167,13 @@ const FileUpload: React.FC<FileUploadProps> = ({
                                 </div>
                             ) : (
                                 <>
-                                    <p className="text-secondary-900 font-semibold text-lg mb-2">
+                                    <p className="text-slate-900 dark:text-white font-semibold text-lg mb-2">
                                         {isDragging ? 'Drop your resume here' : 'Upload Resume'}
                                     </p>
-                                    <p className="text-secondary-500 text-sm mb-4">
+                                    <p className="text-slate-600 dark:text-secondary-500 text-sm mb-4">
                                         Drag & drop or click to browse
                                     </p>
-                                    <p className="text-secondary-400 text-xs">
+                                    <p className="text-slate-400 dark:text-secondary-400 text-xs">
                                         PDF or DOCX • Max {maxSize / (1024 * 1024)}MB
                                     </p>
                                 </>
@@ -186,7 +186,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.9 }}
-                        className="bg-surface border-2 border-primary-500/20 rounded-2xl p-6 relative overflow-hidden group hover:border-primary-500/40 transition-all duration-300"
+                        className="bg-slate-50 dark:bg-surface border-2 border-primary-500/20 rounded-2xl p-6 relative overflow-hidden group hover:border-primary-500/40 transition-all duration-300"
                     >
                         {/* Background decoration */}
                         <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none group-hover:scale-110 transition-transform duration-700">
@@ -202,10 +202,10 @@ const FileUpload: React.FC<FileUploadProps> = ({
                             <div className="flex-1 min-w-0">
                                 <div className="flex items-start justify-between gap-2">
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-secondary-900 font-semibold truncate">
+                                        <p className="text-slate-900 dark:text-white font-semibold truncate">
                                             {currentFile.name}
                                         </p>
-                                        <p className="text-secondary-500 text-sm">
+                                        <p className="text-slate-500 dark:text-secondary-500 text-sm">
                                             {formatFileSize(currentFile.size)}
                                         </p>
                                     </div>

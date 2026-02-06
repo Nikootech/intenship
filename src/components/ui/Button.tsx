@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+    variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'glow';
     size?: 'sm' | 'md' | 'lg';
     isLoading?: boolean;
     children: React.ReactNode;
@@ -22,30 +22,33 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         },
         ref
     ) => {
+        // Changed rounded-xl to rounded-full for the organic MindSpring feel
         const baseStyles =
-            'inline-flex items-center justify-center font-extrabold rounded-2xl transition-all duration-500 focus:outline-none focus:ring-4 focus:ring-primary-400/30 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest relative overflow-hidden group';
+            'inline-flex items-center justify-center font-bold rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary-500/20 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wide relative overflow-hidden group';
 
         const variantStyles = {
             primary:
-                'bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 text-white shadow-[0_10px_20px_-5px_rgba(235,49,54,0.4)] hover:shadow-[0_15px_30px_-5px_rgba(235,49,54,0.6)] border-t border-white/20',
+                'bg-primary-600 hover:bg-primary-500 text-white shadow-lg shadow-primary-500/20 hover:shadow-primary-500/40 border-t border-white/20',
+            glow: 
+                'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-glow hover:shadow-glow-strong border-t border-white/30',
             secondary:
-                'bg-surface text-white border-2 border-border hover:border-primary-500/50 hover:bg-surface/80 shadow-sm hover:shadow-md',
+                'bg-slate-100 dark:bg-surface hover:bg-slate-200 dark:hover:bg-surface/80 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 shadow-lg',
             outline:
-                'bg-transparent border-2 border-primary-500 text-primary-600 hover:bg-primary-500 hover:text-white shadow-sm',
-            ghost: 'bg-transparent text-primary-600 hover:bg-primary-50 rounded-xl',
+                'bg-transparent border-2 border-primary-500/50 text-primary-600 dark:text-white hover:bg-primary-500/10 hover:border-primary-500',
+            ghost: 'bg-transparent text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5',
         };
 
         const sizeStyles = {
-            sm: 'px-6 py-2.5 text-[10px] gap-2',
-            md: 'px-10 py-4 text-xs gap-3',
-            lg: 'px-14 py-5 text-sm gap-4',
+            sm: 'px-5 py-2 text-[10px] gap-2',
+            md: 'px-8 py-3 text-xs gap-2',
+            lg: 'px-10 py-4 text-sm gap-3',
         };
 
         return (
             <motion.div
-                whileHover={{ scale: disabled || isLoading ? 1 : 1.02 }}
-                whileTap={{ scale: disabled || isLoading ? 1 : 0.98 }}
-                className="inline-block w-full sm:w-auto" // Added w-full sm:w-auto for better mobile handling
+                whileHover={{ scale: disabled || isLoading ? 1 : 1.05 }}
+                whileTap={{ scale: disabled || isLoading ? 1 : 0.95 }}
+                className={`inline-block w-full sm:w-auto ${disabled ? 'cursor-not-allowed' : ''}`}
             >
                 <button
                     ref={ref}
@@ -55,12 +58,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                     aria-disabled={disabled || isLoading}
                     {...props}
                 >
-                    {/* Unique Shine Effect */}
-                    {variant === 'primary' && (
-                        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine transition-transform duration-1000" />
+                    {/* Shine Effect */}
+                    {(variant === 'primary' || variant === 'glow') && (
+                        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shine" />
                     )}
 
-                    <span className="relative z-10 flex items-center justify-center gap-3">
+                    <span className="relative z-10 flex items-center justify-center gap-2">
                         {isLoading && <Loader2 className="animate-spin" size={size === 'sm' ? 14 : 18} />}
                         {children}
                     </span>

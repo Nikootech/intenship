@@ -1,119 +1,57 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export interface ProgressBarProps {
+interface ProgressBarProps {
     currentStep: number;
     totalSteps: number;
     seatsLeft?: number;
     role?: 'student' | 'staff';
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({
-    currentStep,
-    totalSteps,
-    seatsLeft = 8,
-    role = 'student',
-}) => {
-    const isStaff = role === 'staff';
-    const progress = (currentStep / totalSteps) * 100;
+const ProgressBar: React.FC<ProgressBarProps> = ({ currentStep, totalSteps, seatsLeft, role }) => {
+    // Determine progress percentage
+    const progress = Math.min((currentStep / totalSteps) * 100, 100);
 
     return (
-        <div className="w-full py-4 bg-secondary-50 border-b border-secondary-100">
-            <div className="max-w-4xl mx-auto px-4">
-                {/* Step Indicators */}
-                <div className="flex items-center justify-between mb-4">
-                    {Array.from({ length: totalSteps }).map((_, index) => {
-                        const stepNumber = index + 1;
-                        const isActive = stepNumber === currentStep;
-                        const isCompleted = stepNumber < currentStep;
-
-                        return (
-                            <React.Fragment key={stepNumber}>
-                                <motion.div
-                                    initial={false}
-                                    animate={{
-                                        scale: isActive ? 1.1 : 1,
-                                    }}
-                                    className="relative flex flex-col items-center"
-                                >
-                                    <div
-                                        aria-label={`Step ${stepNumber}: ${isActive ? 'Current' : isCompleted ? 'Completed' : 'Upcoming'}`}
-                                        className={`
-                      w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm
-                      transition-all duration-500 z-10
-                      ${isCompleted
-                                                ? 'bg-primary-500 text-white shadow-md'
-                                                : isActive
-                                                    ? 'bg-white text-primary-600 border-2 border-primary-500 shadow-md ring-4 ring-primary-500/10'
-                                                    : 'bg-secondary-200 text-secondary-400'
-                                            }
-                    `}
-                                    >
-                                        {isCompleted ? (
-                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                        ) : (
-                                            stepNumber
-                                        )}
-                                    </div>
-                                    <span className={`text-xs mt-2 hidden sm:block font-medium ${isActive ? 'text-primary-600' : 'text-secondary-400'}`}>
-                                        {stepNumber === 1 && 'Profile'}
-                                        {stepNumber === 2 && 'Domain'}
-                                        {isStaff ? (
-                                            stepNumber === 3 && 'Success'
-                                        ) : (
-                                            <>
-                                                {stepNumber === 3 && 'Payment'}
-                                                {stepNumber === 4 && 'Success'}
-                                            </>
-                                        )}
-                                    </span>
-                                </motion.div>
-                                {index < totalSteps - 1 && (
-                                    <div className="flex-1 h-1 mx-2 bg-secondary-200 rounded-full overflow-hidden relative">
-                                        <motion.div
-                                            initial={{ width: 0 }}
-                                            animate={{
-                                                width: stepNumber < currentStep ? '100%' : '0%',
-                                            }}
-                                            transition={{ duration: 0.5 }}
-                                            className="absolute top-0 left-0 h-full bg-primary-500"
-                                        />
-                                    </div>
-                                )}
-                            </React.Fragment>
-                        );
-                    })}
+        <div className="w-full max-w-2xl mx-auto mb-8">
+            <div className="flex justify-between items-end mb-3">
+                <div className="flex flex-col">
+                    <span className="text-xs font-bold text-primary-600 dark:text-primary-500 uppercase tracking-widest mb-1">
+                        Step {currentStep} of {totalSteps}
+                    </span>
+                    <span className="text-slate-900 dark:text-white font-bold text-lg">
+                        {currentStep === 1 && "Personal Details"}
+                        {currentStep === 2 && "Select Domain"}
+                        {currentStep === 3 && role !== 'staff' && "Secure Seat"}
+                        {currentStep === 3 && role === 'staff' && "Review"}
+                        {currentStep === 4 && "Confirmation"}
+                    </span>
                 </div>
+                
+                {seatsLeft !== undefined && (
+                     <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-background/50 border border-slate-200 dark:border-white/10 px-3 py-1.5 rounded-lg">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                        </span>
+                        <span className="text-xs font-medium text-slate-500 dark:text-text-secondary">
+                            Only <span className="text-slate-900 dark:text-white font-bold">{seatsLeft} seats</span> left
+                        </span>
+                    </div>
+                )}
+            </div>
 
-                {/* Progress percentage and seats left */}
-                <div className="flex items-center justify-between text-sm">
-                    <motion.div
-                        key={progress}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="text-secondary-500 font-medium"
-                    >
-                        {Math.round(progress)}% Complete
-                    </motion.div>
-                    {!isStaff && (
-                        <motion.div
-                            animate={{ scale: [1, 1.05, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="bg-red-50 px-3 py-1 rounded-full border border-red-100 items-center flex gap-1.5"
-                        >
-                            <span className="text-red-500 text-lg">🔥</span>
-                            <span className="text-red-600 font-bold text-xs sm:text-sm">
-                                Only {seatsLeft} Seats Left!
-                            </span>
-                        </motion.div>
-                    )}
-                </div>
+            {/* Bar Container */}
+            <div className="h-2 bg-slate-200 dark:bg-text-muted/10 rounded-full overflow-hidden relative">
+                <motion.div
+                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-primary-600 to-primary-400 rounded-full box-shadow-glow"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progress}%` }}
+                    transition={{ duration: 0.8, ease: "circOut" }}
+                >
+                    {/* Shimmer on bar */}
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shine" />
+                </motion.div>
             </div>
         </div>
     );

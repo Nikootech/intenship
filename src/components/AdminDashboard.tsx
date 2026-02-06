@@ -103,14 +103,14 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBack }) => {
             case 'verified':
             case 'paid':
             case 'approved':
-                return 'bg-primary-50 text-primary-600 border-primary-100';
+                return 'bg-emerald-50 dark:bg-primary-50 text-emerald-600 dark:text-primary-600 border-emerald-100 dark:border-primary-100';
             case 'pending':
             case 'waiting_approval':
                 return 'bg-amber-50 text-amber-600 border-amber-100';
             case 'rejected':
                 return 'bg-rose-50 text-rose-600 border-rose-100';
             default:
-                return 'bg-secondary-50 text-secondary-600 border-secondary-100';
+                return 'bg-slate-50 dark:bg-secondary-50 text-slate-600 dark:text-secondary-600 border-slate-200 dark:border-secondary-100';
         }
     };
 
@@ -142,8 +142,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBack }) => {
                                     <LayoutDashboard size={18} />
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <h1 className="text-lg font-black text-white tracking-tight">Admin Console</h1>
-                                    <div className="flex items-center bg-primary-900/30 px-2 py-0.5 rounded-full border border-primary-500/30">
+                                    <h1 className="text-lg font-black text-slate-900 dark:text-white tracking-tight">Admin Console</h1>
+                                    <div className="flex items-center bg-primary-100 dark:bg-primary-900/30 px-2 py-0.5 rounded-full border border-primary-200 dark:border-primary-500/30">
                                         <span className="flex h-1.5 w-1.5 relative">
                                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
                                             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary-500"></span>
@@ -230,8 +230,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBack }) => {
                                             <stat.icon size={22} />
                                         </div>
                                         <div className="flex flex-col items-end text-right">
-                                            <p className="text-secondary-400 text-xs font-bold uppercase tracking-wider">{stat.label}</p>
-                                            <h3 className="text-2xl font-black text-secondary-900 mt-1">{stat.value}</h3>
+                                            <p className="text-slate-500 dark:text-secondary-400 text-xs font-bold uppercase tracking-wider">{stat.label}</p>
+                                            <h3 className="text-2xl font-black text-slate-900 dark:text-secondary-900 mt-1">{stat.value}</h3>
                                         </div>
                                     </div>
                                     <div className="pt-4 border-t border-secondary-50 flex items-center justify-between">
@@ -257,7 +257,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBack }) => {
                             onClick={() => setActiveTab(tab.id as any)}
                             className={`flex items-center gap-2 px-6 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider transition-all ${activeTab === tab.id
                                 ? 'bg-primary-600 text-white shadow-md scale-[1.02]'
-                                : 'text-secondary-400 hover:text-white hover:bg-secondary-800'
+                                : 'text-slate-500 dark:text-secondary-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-secondary-800'
                                 }`}
                         >
                             <tab.icon size={16} />
@@ -278,7 +278,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBack }) => {
                                     placeholder="Search by name, email or ID..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3 bg-secondary-50 hover:bg-white border-2 border-transparent focus:border-primary-500/20 focus:bg-white rounded-2xl text-sm font-medium transition-all outline-none"
+                                    className="w-full pl-12 pr-4 py-3 bg-slate-100 dark:bg-secondary-50 hover:bg-white dark:hover:bg-surface border-2 border-transparent focus:border-primary-500/20 focus:bg-white dark:focus:bg-surface rounded-2xl text-sm font-medium transition-all outline-none text-slate-900 dark:text-white"
                                 />
                             </div>
 
@@ -290,8 +290,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBack }) => {
                                                 key={s}
                                                 onClick={() => setStatusFilter(s)}
                                                 className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all ${statusFilter === s
-                                                    ? 'bg-white text-primary-600 shadow-sm'
-                                                    : 'text-secondary-400 hover:text-secondary-600'
+                                                    ? 'bg-white dark:bg-surface text-primary-600 shadow-sm'
+                                                    : 'text-slate-500 dark:text-secondary-400 hover:text-slate-900 dark:hover:text-secondary-600'
                                                     }`}
                                             >
                                                 {s}
@@ -341,10 +341,10 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBack }) => {
                                                             {enrollment.name.charAt(0)}
                                                         </div>
                                                         <div>
-                                                            <p className="font-bold text-white group-hover:text-primary-600 transition-colors">
+                                                            <p className="font-bold text-slate-900 dark:text-white group-hover:text-primary-600 transition-colors">
                                                                 {enrollment.name}
                                                             </p>
-                                                            <p className="text-secondary-500 text-[11px] font-medium">{enrollment.enrollment_id}</p>
+                                                            <p className="text-slate-500 dark:text-secondary-500 text-[11px] font-medium">{enrollment.enrollment_id}</p>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -359,7 +359,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBack }) => {
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <span className="text-sm font-black text-white">₹{enrollment.amount}</span>
+                                                    <span className="text-sm font-black text-slate-900 dark:text-white">₹{enrollment.amount}</span>
                                                 </td>
                                                 {activeTab === 'enrollments' && (
                                                     <td className="px-6 py-4">
@@ -430,11 +430,11 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBack }) => {
                                                 <td className="px-6 py-4 text-xs font-mono text-primary-600">{pay.id}</td>
                                                 <td className="px-6 py-4">
                                                     <div className="flex flex-col">
-                                                        <span className="text-xs text-secondary-900">{pay.email}</span>
-                                                        <span className="text-[10px] text-secondary-500">{pay.contact}</span>
+                                                        <span className="text-xs text-slate-900 dark:text-secondary-900">{pay.email}</span>
+                                                        <span className="text-[10px] text-slate-500 dark:text-secondary-500">{pay.contact}</span>
                                                     </div>
                                                 </td>
-                                                <td className="px-6 py-4 text-sm font-black text-secondary-900">₹{pay.amount / 100}</td>
+                                                <td className="px-6 py-4 text-sm font-black text-slate-900 dark:text-secondary-900">₹{pay.amount / 100}</td>
                                                 <td className="px-6 py-4">
                                                     <span className="text-[10px] font-black uppercase text-secondary-500 bg-secondary-100 px-2 py-0.5 rounded-md">
                                                         {pay.method}
@@ -466,9 +466,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBack }) => {
                                     </thead>
                                     <tbody className="divide-y divide-secondary-50">
                                         {rzpSettlements.map((set) => (
-                                            <tr key={set.id} className="hover:bg-secondary-50/50 transition-colors font-medium">
+                                            <tr key={set.id} className="hover:bg-slate-50 dark:hover:bg-secondary-50/50 transition-colors font-medium">
                                                 <td className="px-6 py-4 text-xs font-mono text-primary-600">{set.id}</td>
-                                                <td className="px-6 py-4 text-sm font-black text-secondary-900">₹{set.amount / 100}</td>
+                                                <td className="px-6 py-4 text-sm font-black text-slate-900 dark:text-secondary-900">₹{set.amount / 100}</td>
                                                 <td className="px-6 py-4 text-xs text-rose-500">₹{set.fees / 100}</td>
                                                 <td className="px-6 py-4 text-xs text-rose-400">₹{set.tax / 100}</td>
                                                 <td className="px-6 py-4 text-center">

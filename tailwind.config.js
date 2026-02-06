@@ -4,73 +4,71 @@ export default {
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
+    darkMode: 'class',
     theme: {
         extend: {
             colors: {
-                // Strict Brand Palette
-                background: '#000000', // Primary Background
-                surface: '#191718',    // Secondary Background / Surfaces
-                border: '#363334',     // Borders & Dividers
-
-                // Brand Accent
+                // MindMesh Inspired - Vibrant Red & Deep Dark
+                background: '#050202', // Very deep red-black
+                surface: '#0C0707',    // Slightly lighter dark
+                border: '#211313',     // Dark red border
+                
+                // Brand Accent - Vibrant Brand Red
                 primary: {
-                    DEFAULT: '#EB3136',
-                    hover: '#d41f24',
-                    light: '#ff5c61',
-                    // Numeric scale for backward compatibility
-                    50: '#fff1f2',
-                    100: '#ffe4e6',
-                    200: '#fecdd3',
-                    300: '#fda4af',
-                    400: '#fb7185',
-                    500: '#EB3136', // Main Brand Accent
-                    600: '#d41f24', // Hover
-                    700: '#be123c',
-                    800: '#9f1239',
-                    900: '#881337',
+                    DEFAULT: '#DC2626', // Red 600
+                    hover: '#EF4444',   // Red 500
+                    light: '#F87171',   // Red 400
+                    50: '#FEF2F2',
+                    100: '#FEE2E2',
+                    200: '#FECACA',
+                    300: '#FCA5A5',
+                    400: '#F87171',
+                    500: '#EF4444',     // Main Brand Color
+                    600: '#DC2626', 
+                    700: '#B91C1C',
+                    800: '#991B1B',
+                    900: '#7F1D1D',
                 },
 
-                // Text Colors
+                // Text Colors - Keeping crisp white
                 text: {
-                    primary: '#FFFFFF',   // High contrast primary text (Assumed for dark mode)
-                    secondary: '#717274', // Secondary Text / Icons
-                    muted: '#96989A',     // Muted Text / Labels
+                    primary: '#FFFFFF',
+                    secondary: '#9CA3AF', // Gray-400
+                    muted: '#6B7280',     // Gray-500
                 },
-
-                // Legacy/Semantic mapping to ensure existing classes adapt
-                secondary: {
-                    50: '#000000',
-                    100: '#0a0a0a',
-                    200: '#191718', // Surface
-                    300: '#363334', // Border
-                    400: '#717274', // Secondary Text
-                    500: '#96989A', // Muted Text
-                    600: '#a3a3a3',
-                    700: '#d4d4d4',
-                    800: '#e5e5e5',
-                    900: '#ffffff', // Inverse scale for dark mode mapping if used dynamically
-                },
-
-                // Status colors
-                success: '#10b981',
-                danger: '#EB3136',  // Use brand accent for danger too, or standard red? Keeping accent consistent.
-                warning: '#f59e0b',
-                info: '#3b82f6',
+                
+                // Functional
+                success: '#10B981',
+                warning: '#FBBF24',
+                info: '#3B82F6',
+                danger: '#EF4444',
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
             },
             boxShadow: {
-                'card': '0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)', // Darker, deeper shadows
-                'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.4)',
-                'glow': '0 0 20px rgba(235, 49, 54, 0.3)', // Red/Accent glow
-                'elevation': '0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.2)',
+                'glow': '0 0 20px -5px rgba(220, 38, 38, 0.4)', // Red Glow
+                'glow-strong': '0 0 50px -10px rgba(220, 38, 38, 0.5)',
+                'glass-card': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+            },
+            animation: {
+                'shine': 'shine 1.5s infinite',
+                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'float': 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+                shine: {
+                    '0%': { transform: 'translateX(-100%)' },
+                    '100%': { transform: 'translateX(100%)' },
+                },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-10px)' },
+                }
             },
             backgroundImage: {
-                'gradient-primary': 'linear-gradient(135deg, #EB3136 0%, #d41f24 100%)', // Red gradient
-                'gradient-dark': 'linear-gradient(to bottom, #191718, #000000)', // Subtle surface gradient
-                'gradient-glow': 'radial-gradient(circle at center, rgba(235, 49, 54, 0.15) 0%, transparent 70%)',
-            },
+                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            }
         },
     },
     plugins: [],

@@ -13,7 +13,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         return (
             <div className="relative w-full">
                 {label && (
-                    <label className="block mb-2 text-sm font-semibold text-text-secondary">
+                    <label className="block mb-2 text-sm font-semibold text-slate-600 dark:text-text-secondary">
                         {label}
                     </label>
                 )}
@@ -22,10 +22,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
                         ref={ref}
                         className={`
               w-full px-4 py-4 pr-12
-              bg-surface
-              border-2 rounded-xl
-              ${error ? 'border-red-500' : 'border-border'}
-              text-white
+              bg-slate-50 dark:bg-surface
+              border border-slate-200 dark:border-border rounded-xl
+              ${error ? 'border-red-500 focus:border-red-500' : 'border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20'}
+              text-slate-900 dark:text-white
               focus:outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500
               appearance-none cursor-pointer
               transition-all duration-300
@@ -47,7 +47,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
                         ))}
                     </select>
                     <ChevronDown
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-secondary-400 pointer-events-none"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-secondary-400 pointer-events-none"
                         size={20}
                     />
                 </div>
