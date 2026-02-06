@@ -5,6 +5,7 @@ interface RazorpayOptions {
     currency: string;
     name: string;
     description: string;
+    image?: string;
     order_id: string;
     handler: (response: RazorpayResponse) => void;
     prefill?: {
@@ -96,8 +97,9 @@ export const openRazorpayCheckout = (
         })(),
         amount: order.amount,
         currency: 'INR',
-        name: 'Internship Enrollment',
-        description: '15-Day Internship Program',
+        name: 'MindMesh',
+        description: 'Internship Program Enrollment',
+        image: window.location.origin + '/logo.png',
         handler: onSuccess,
         prefill: {
             name: prefillData.name,

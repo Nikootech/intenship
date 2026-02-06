@@ -141,6 +141,36 @@ const Step3Payment: React.FC<Step3PaymentProps> = ({
                 </div>
             </Card>
 
+            {/* Goals and Achievements */}
+            <Card className="p-5 mb-5 bg-gradient-to-br from-surface to-primary-900/20 border-primary-500/30">
+                <h3 className="text-lg font-black text-white mb-4 flex items-center gap-2">
+                    <span>🏆</span> Goals & Achievements
+                </h3>
+                <div className="space-y-3">
+                    <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary-500/20 flex items-center justify-center text-primary-400 font-bold shrink-0">1</div>
+                        <div>
+                            <p className="text-white font-bold text-sm">Real-world Experience</p>
+                            <p className="text-secondary-500 text-xs">Work on live projects and gain industry-standard development skills.</p>
+                        </div>
+                    </div>
+                    <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary-500/20 flex items-center justify-center text-primary-400 font-bold shrink-0">2</div>
+                        <div>
+                            <p className="text-white font-bold text-sm">Professional Certification</p>
+                            <p className="text-secondary-500 text-xs">Earn a verified certificate of completion from MindMesh.</p>
+                        </div>
+                    </div>
+                    <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary-500/20 flex items-center justify-center text-primary-400 font-bold shrink-0">3</div>
+                        <div>
+                            <p className="text-white font-bold text-sm">Career Growth</p>
+                            <p className="text-secondary-500 text-xs">Add a significant project to your portfolio and boost your resume.</p>
+                        </div>
+                    </div>
+                </div>
+            </Card>
+
             {/* Security Badge */}
             <div className="bg-surface border border-border rounded-xl p-3 mb-5 shadow-sm">
                 <div className="flex items-center gap-3">
