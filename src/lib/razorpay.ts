@@ -1,3 +1,4 @@
+import { supabase } from '@/lib/db';
 interface RazorpayOptions {
     key: string;
     amount: number;
@@ -49,24 +50,32 @@ export const loadRazorpay = (): Promise<boolean> => {
 };
 
 // Create Razorpay order (Simulation for Demo)
+// Create Razorpay order via Supabase Edge Function
 export const createRazorpayOrder = async (
     amount: number,
-    _receipt: string
+    receipt: string
 ): Promise<{ id: string; amount: number; currency: string }> => {
-    // In a real app, this calls your backend.
-    // For this demo, we'll return a mock order to allow the UI to proceed.
-    // Note: Without a real order_id, payment verification might fail on backend,
-    // but the modal will open and transaction will go through on Razorpay.
+    console.log('Creating order with:', { amount, receipt });
 
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({
-                id: '', // Empty ID tells our checkout to skip sending order_id
-                amount: amount * 100,
-                currency: 'INR'
-            });
-        }, 1000);
+    const { data, error } = await supabase.functions.invoke('razorpay-create-order', {
+        body: {
+            amount: amount * 100, // Convert to paise
+            currency: 'INR',
+            receipt
+        }
     });
+
+    if (error) {
+        console.error('Supabase Function Error:', error);
+        throw new Error(`Failed to create order: ${error.message}`);
+    }
+
+    if (!data || !data.id) {
+        console.error('Invalid Order Data:', data);
+        throw new Error('Invalid order response from server');
+    }
+
+    return data;
 };
 
 // Open Razorpay checkout
